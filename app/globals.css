@@ -2,26 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components {
+  .btn-primary {
+    @apply px-4 py-3 bg-gray-900 hover:bg-gray-700 focus-visible:outline-none focus-visible:ring-2 ring-offset-2 ring-blue-500 text-white rounded-lg;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  .btn-secondary {
+    @apply px-4 py-3 text-gray-900 bg-gray-100 hover:bg-gray-200 focus-visible:outline-none active:bg-gray-300 focus-visible:ring-2 ring-offset-2 ring-blue-500 rounded-lg;
+  }
 }
