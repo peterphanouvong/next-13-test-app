@@ -1,18 +1,28 @@
 /** @type {import('next').NextConfig} */
+const webpack = require("webpack");
 
-const nextConfig = {
-  env: {
-    KINDE_SITE_URL:
-      process.env.KINDE_SITE_URL ?? `https://${process.env.VERCEL_URL}`,
-    KINDE_POST_LOGOUT_REDIRECT_URL:
-      process.env.KINDE_POST_LOGOUT_REDIRECT_URL ??
-      `https://${process.env.VERCEL_URL}`,
-    KINDE_POST_LOGIN_REDIRECT_URL:
-      process.env.KINDE_POST_LOGIN_REDIRECT_URL ??
-      `https://${process.env.VERCEL_URL}`,
+module.exports = {
+  webpack(config) {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        "process.env.KINDE_SITE_URL": JSON.stringify(
+          process.env.VERCEL_ENV === "preview"
+            ? `https://${process.env.VERCEL_URL}`
+            : null
+        ),
+        "process.env.KINDE_POST_LOGOUT_REDIRECT_URL": JSON.stringify(
+          process.env.VERCEL_ENV === "preview"
+            ? `https://${process.env.VERCEL_URL}`
+            : null
+        ),
+        "process.env.KINDE_POST_LOGIN_REDIRECT_URL": JSON.stringify(
+          process.env.VERCEL_ENV === "preview"
+            ? `https://${process.env.VERCEL_URL}/overview/dashboard`
+            : null
+        ),
+      })
+    );
+
+    return config;
   },
 };
-
-console.log(nextConfig);
-
-module.exports = nextConfig;
