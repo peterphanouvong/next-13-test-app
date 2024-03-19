@@ -1,5 +1,5 @@
 "use client";
-import { useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
+import { LoginLink, useKindeAuth } from "@kinde-oss/kinde-auth-nextjs";
 import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -38,7 +38,6 @@ export default function Home() {
 
   const handleGetFeatureFlags = () => {
     console.log(getFlag);
-    console.log(getFlag("create:event"));
   };
 
   if (isLoading)
@@ -56,15 +55,21 @@ export default function Home() {
     <main className="flex min-h-screen flex-col gap-10 items-center justify-center p-24">
       {!isAuthenticated ? (
         <div>
-          <Link
+          {/* <Link
             prefetch={false}
             className="btn-primary mr-2"
             href={{
               pathname: "/api/auth/login",
+              query: {
+                post_login_redirect_url: "/oops",
+                login_hint: "sup",
+                lang: "fr",
+              },
             }}
           >
             Login
-          </Link>
+          </Link> */}
+          <LoginLink>Login</LoginLink>
 
           <Link
             prefetch={false}
