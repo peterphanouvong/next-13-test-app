@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 
-console.log("LOOK HERE", process.env.VERCEL_URL);
 const nextConfig = {
   env: {
     KINDE_SITE_URL:
@@ -13,5 +12,7 @@ const nextConfig = {
       `https://${process.env.VERCEL_URL}`,
   },
 };
+
+console.log(nextConfig);
 
 module.exports = nextConfig;
